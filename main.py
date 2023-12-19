@@ -175,6 +175,9 @@ def pendu(difficulte):
     
     pygame.display.set_caption("Jeu du Pendu - Devinez le mot!")
 
+    # Initialisez la liste des lettres essayées à l'extérieur de la boucle principale
+    lettres_essayed_liste = []
+
     clock = pygame.time.Clock()
 
     while True:
@@ -189,6 +192,7 @@ def pendu(difficulte):
                     lettre = chr(event.key).lower()
                     if lettre not in lettres_trouvees:
                         lettres_trouvees.add(lettre)
+                        lettres_essayed_liste.append(lettre)
                         if lettre not in mot_a_trouver:
                             erreurs += 1
 
@@ -199,8 +203,7 @@ def pendu(difficulte):
         fenetre.blit(mot_texte, (largeur // 2 - mot_texte.get_width() // 2, 50))
 
         # Affiche les lettres essayées au-dessus des underscores
-        lettres_essayed = " ".join(sorted(lettres_trouvees))
-        lettres_essayed_texte = font.render(f"Tentatives: {lettres_essayed}", True, NOIR)
+        lettres_essayed_texte = font.render(f"Tentatives: {' '.join(lettres_essayed_liste)}", True, NOIR)
         fenetre.blit(lettres_essayed_texte, (largeur // 2 - lettres_essayed_texte.get_width() // 2, 20))
 
         erreurs_texte = font.render("Erreurs {}/{}".format(erreurs, erreurs_max), True, NOIR)
@@ -209,7 +212,7 @@ def pendu(difficulte):
         pygame.display.flip()
         clock.tick(60)
 
-        if set(lettres_trouvees) == set(mot_a_trouver):
+        if all(lettre in lettres_trouvees for lettre in mot_a_trouver):
             gagne_texte = font.render("Félicitations! Vous avez deviné le mot '{}'.".format(mot_a_trouver), True, NOIR)
             fenetre.blit(gagne_texte, (largeur // 2 - gagne_texte.get_width() // 2, 250))
             pygame.display.flip()

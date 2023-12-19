@@ -25,6 +25,8 @@ muscle
 telephone
 canette
 patate
-pioche
+pioche  
 feraille 
 anticonstitutionnellement
+telephone 
+clavier 
