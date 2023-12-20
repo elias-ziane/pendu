@@ -30,3 +30,13 @@ feraille
 anticonstitutionnellement
 telephone 
 clavier 
+ecran
+paquet 
+test 
+nouveau 
+mur 
+nouveau 
+glace
+gourde
+touche 
+parkings 
